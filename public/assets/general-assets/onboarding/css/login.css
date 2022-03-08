@@ -1,0 +1,19 @@
+.actions {
+    display: none;
+}
+
+.btn-login-div{
+    position: absolute; 
+    right: 50px; 
+    bottom: 25px;
+}
+
+.btn-login{
+    height: 41px; 
+    padding: 0 30px;
+}
+
+.login-p{
+    text-align: left; 
+    font-size: 14px;
+}

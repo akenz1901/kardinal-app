@@ -1,0 +1,7 @@
+.card-text, .card-title {
+    text-align: left !important;
+    line-height: 20px !important;
+}
+p.card-text {
+    font-size: small !important;
+}

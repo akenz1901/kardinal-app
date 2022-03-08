@@ -1,0 +1,11 @@
+export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const FETCH_WALLET = 'walletDetails';
+export const FETCH_RESERVED_ACCOUNT = 'fetchReservedAccount';
+export const ELIGIBILITY = '';
+export const APPLY_LOAN = '';
+export const FETCH_ONBOARDING = 'Onboarding';
+export const FETCH_INDIVIDUAL_KYC = 'individualKyc';
+export const FETCH_EMPLOYEE_DETAILS = 'employeeDetails';
+export const FETCH_ASSETS_CHARTS = 'assetCharts';
+// export const APPLY_LOAN = '';

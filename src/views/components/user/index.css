@@ -1,0 +1,187 @@
+/*---------- TOP NAVBAR -------*/
+.topbar-nav {
+
+}
+
+.feather {
+    width: 34px !important;
+    height: 34px !important;
+}
+.nav-items {
+    display: flex;
+    justify-content: center;
+    align-items: center !important;
+}
+a.navbar-brand {
+    width: 150px !important;
+    height: inherit;
+}
+a.navbar-brand img {
+    width: inherit !important;
+    height: inherit !important;
+}
+
+/*-------------------------
+SIDEBAR
+-------------------------*/
+
+.sidebar-open {
+    position: fixed;
+    bottom: 0;
+    width: 300px;
+    z-index: 996;
+    transition: all 0.3s;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    overflow: hidden;
+    scrollbar-color: #aab7cf transparent;
+    /* // box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1); */
+    text-align: left;
+    top: 0;
+    left: -300px;
+    z-index: 9999;
+    width: 300px;
+    height: 100%;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    padding: 0;
+    -webkit-box-shadow: 0 5px 20px rgb(0 0 0 / 10%);
+    box-shadow: 0 5px 20px rgb(0 0 0 / 10%);
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: #fff;
+  }
+  .sidebar-open:hover {
+    overflow-y: scroll;
+  }
+  @media only screen and (max-width: 1199px) {
+    .sidebar-open {
+      left: 0px;
+    }
+  }
+  .sidebar-open::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #fff;
+  }
+  .sidebar-open::-webkit-scrollbar-thumb {
+    background-color: #aab7cf;
+  }
+  .sidebar-menu-categories {
+    padding-left: 20px !important;
+  }
+  .logout {
+      cursor: pointer;
+  }
+
+/*---------------------
+TRIP
+----------------------*/
+
+.layout-spacing {
+    padding: 0px 0px !important;
+    
+}
+div.form-group.col-md-12 {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: 500px !important;
+}
+label {
+    color: #3B3F5C !important;
+}
+
+/*-------------------------
+REPORTING
+-------------------------*/
+
+div.widget.widget-five {
+    margin: 0px 10px 10px 20px !important;
+    padding: 0px 0px !important;
+}
+div.col-xl-3.col-sm-12.col-12.layout-spacing {
+    margin-bottom: 20px !important;
+}
+div.widget.widget-chart-two {
+    height: 100% 100% !important;
+}
+div.col-xl-4.col-lg-12.col-md-12.col-sm-12.col-12.layout-spacing{
+    margin: 0px 0px 20px 0px !important;
+}
+@media only screen and (max-width: 1200px){
+    div.col-xl-4.col-lg-12.col-md-12.col-sm-12.col-12.layout-spacing{
+        margin: 0px 20px 20px 20px !important;
+    }  
+}
+/*---------APEX-CHART---------*/
+
+.apexcharts-legend {
+    display: flex;
+    overflow: auto;
+    padding: 0 10px;
+  }
+
+  .apexcharts-legend.position-bottom, .apexcharts-legend.position-top {
+    flex-wrap: wrap
+  }
+  .apexcharts-legend.position-right, .apexcharts-legend.position-left {
+    flex-direction: column;
+    bottom: 0;
+  }
+
+  .apexcharts-legend.position-bottom.left, .apexcharts-legend.position-top.left, .apexcharts-legend.position-right, .apexcharts-legend.position-left {
+    justify-content: flex-start;
+  }
+
+  .apexcharts-legend.position-bottom.center, .apexcharts-legend.position-top.center {
+    justify-content: center;  
+  }
+
+  .apexcharts-legend.position-bottom.right, .apexcharts-legend.position-top.right {
+    justify-content: flex-end;
+  }
+
+  .apexcharts-legend-series {
+    cursor: pointer;
+    line-height: normal;
+  }
+
+  .apexcharts-legend.position-bottom .apexcharts-legend-series, .apexcharts-legend.position-top .apexcharts-legend-series{
+    display: flex;
+    align-items: center;
+  }
+
+  .apexcharts-legend-text {
+    position: relative;
+    font-size: 14px;
+  }
+
+  .apexcharts-legend-text *, .apexcharts-legend-marker * {
+    pointer-events: none;
+  }
+
+  .apexcharts-legend-marker {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 3px;
+  }
+  
+  .apexcharts-legend.right .apexcharts-legend-series, .apexcharts-legend.left .apexcharts-legend-series{
+    display: inline-block;
+  }
+
+  .apexcharts-legend-series.no-click {
+    cursor: auto;
+  }
+
+  .apexcharts-legend .apexcharts-hidden-zero-series, .apexcharts-legend .apexcharts-hidden-null-series {
+    display: none !important;
+  }
+
+  .inactive-legend {
+    opacity: 0.45;
+  }
