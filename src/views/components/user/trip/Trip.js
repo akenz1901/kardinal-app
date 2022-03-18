@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { MultiSelect } from "../../../../utilities/multi-select-form";
 import '../index.css';
 import GuestTravelModal from "./GuestTravelModal";
@@ -12,28 +12,35 @@ import GuestTravelModal from "./GuestTravelModal";
     { value: 'chocolate', label: 'Rebookable' },
     { value: 'strawberry', label: 'Cancelable' }
   ]
+
 function Trip(){
+    const [isOneTime, setOneTime] = useState(false)
+    const switchToOneTime = () => {
+              setOneTime(true)
+          }
+    const offOneTime = () => {
+            setOneTime(false)
+        }
     return(
-        <div className="main-container" id="container">
-        
-    <div className="overlay"></div>
-        <div className="search-overlay"></div>
+        <div className="main-container" id="container"> 
+        {/* <div className="overlay"></div> */}
+        {/* <div className="search-overlay"></div> */}
             {/* <!--  BEGIN CONTENT AREA  --> */}
             <div id="content" className="main-content">
-                <div className="layout-px-spacing">
-                    <div className="page-header">
+                <div className="layout-px-spacing" style={{background: "#243256"}}>
+                    {/* <div className="page-header">
                         <div className="page-title">
                             <h3>Trips</h3>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-lg-12 col-12 layout-spacing">
-                        <div className="widget widget-content widget-content-area border-tab widget-account-invoice-one widget-chart-three"  style={{padding: "0px 20px"}}>
-                            <div className="widget-heading" style={{padding: "20px 0px"}}>
-                                <div>
+                        <div className="widget widget-content widget-content-area border-tab widget-account-invoice-one widget-chart-three"  style={{padding: "0px 20px", background:"#243256", border:"none"}}>
+                            {/* <div className="widget-heading" style={{padding: "20px 0px"}}> */}
+                                {/* <div>
                                     <h5>Trips</h5>
-                                </div>
-                            </div>
-                            <ul className="nav nav-tabs mt-3" id="border-tabs" role="tablist">
+                                </div> */}
+                            {/* </div> */}
+                            <ul className="nav nav-tabs mt-3" id="border-tabs" role="tablist" style={{background: "white", marginRight: "25cm"}}>
                                 <li className="nav-item">
                                     <a className="nav-link active" id="border-travel-tab" data-toggle="tab" href="#border-travel" role="tab" aria-controls="border-travel" aria-selected="true">
                                         <i className="fa fa-plane"></i> 
@@ -53,7 +60,7 @@ function Trip(){
                                     <i className="fa fa-car"></i> Car</a>
                                 </li>
                             </ul>
-                            <div className="tab-content mb-4" id="border-tabsContent">
+                            <div className="tab-content mb-4" id="border-tabsContent" style={{background:"white"}}>
                                 <div className="tab-pane fade show active" id="border-travel" role="tabpanel" ariaLabelledby="border-travel-tab">
                                     <div className="form-row">
                                         <div className="form-group col-md-6">
@@ -61,20 +68,20 @@ function Trip(){
                                             <MultiSelect option={travelers}/>
                                         </div>
                                         
-                                        <div className="form-group col-md-6">
+                                        {/* <div className="form-group col-md-6">
                                             <label for="input">Are you making a booking for a guest?</label>
                                             <p className="form-control"><a href="#addGuestTravelerModal" data-toggle="modal" data-target="#addGuestTravelerModal">+ Add guest traveler</a></p>
                                             <GuestTravelModal />
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="form-row mb-4">
                                         <div className="form-group col-md-12">
-                                            <label className="new-control new-radio radio-primary">
+                                            <label className="new-control new-radio radio-primary" onClick={offOneTime}>
                                                 <input type="radio" className="new-control-input" name="custom-radio-1" checked />
                                                 <span className="new-control-indicator"></span>Roundtrip
                                             </label>
                                             <label className="new-control new-radio radio-primary">
-                                                <input type="radio" className="new-control-input" name="custom-radio-1" />
+                                                <input onClick={switchToOneTime} type="radio" className="new-control-input" name="custom-radio-1" />
                                                 <span className="new-control-indicator"></span>Oneway
                                             </label>
                                             <label className="new-control new-radio radio-primary">
@@ -96,12 +103,16 @@ function Trip(){
                                             <label for="destination">Destination</label>
                                             <input type="text" className="form-control" id="destination" placeholder="Destination" />
                                         </div>
-                                        <div className="form-group col-md-2">
+                                        <div className="form-group col-md-2" hidden={isOneTime}>
                                             <label for="start_date">Start Date</label>
                                             <input type="date" className="form-control" id="start_date" />
                                         </div>
-                                        <div className="form-group col-md-2">
+                                        <div className="form-group col-md-2" hidden={isOneTime}>
                                             <label for="end_date">End Date</label>
+                                            <input type="date" className="form-control" id="end_date" />
+                                        </div>
+                                        <div className="form-group col-md-2" hidden={!isOneTime}>
+                                            <label for="end_date">Date</label>
                                             <input type="date" className="form-control" id="end_date" />
                                         </div>
                                     </div>
@@ -147,11 +158,11 @@ function Trip(){
                                             <label for="input">Select up to 5 travelers</label>
                                             <MultiSelect option={travelers}/>
                                         </div>
-                                        <div className="form-group col-md-6">
+                                        {/* <div className="form-group col-md-6">
                                             <label for="input">Are you making a booking for a guest?</label>
                                             <p className="form-control"><button data-toggle="modal" data-target="#addGuestTravelerModal">+ Add guest traveler</button></p>
                                             <GuestTravelModal />
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="form-row mb-4">
                                         <div className="form-group col-md-6">
@@ -250,11 +261,11 @@ function Trip(){
                                             <label for="input">Select up to 5 travelers</label>
                                             <MultiSelect option={travelers}/>
                                         </div>
-                                        <div className="form-group col-md-6">
+                                        {/* <div className="form-group col-md-6">
                                             <label for="input">Are you making a booking for a guest?</label>
                                             <p className="form-control"><button data-toggle="modal" data-target="#addGuestTravelerModal">+ Add guest traveler</button></p>
                                             <GuestTravelModal />
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="form-row mb-4">
                                         <div className="row col-md-12">
@@ -263,7 +274,7 @@ function Trip(){
                                                 <span className="new-control-indicator"></span>Roundtrip
                                             </label>
                                             <label className="new-control new-radio radio-primary">
-                                                <input type="radio" className="new-control-input" name="custom-radio-1" />
+                                                <input onChange={switchToOneTime} type="radio" className="new-control-input" name="custom-radio-1" />
                                                 <span className="new-control-indicator"></span>Oneway
                                             </label>
                                             <label className="new-control new-checkbox checkbox-dark">
@@ -271,7 +282,8 @@ function Trip(){
                                                 <span className="new-control-indicator"></span>Email Request
                                             </label>
                                         </div>
-                                    </div>    
+                                    </div>
+                                    {/* TRIP TYPE SELECTION */}
                                     <div className="form-row mb-4">
                                         <div className="form-group col-md-4">
                                             <label for="departure">Departure</label>
@@ -289,7 +301,9 @@ function Trip(){
                                             <label for="end_date">End Date</label>
                                             <input type="date" className="form-control" id="end_date" />
                                         </div>
+                                        
                                     </div>
+                                    
                                     <div className="form-row mb-4">
                                         <div className="form-group col-md-3">
                                             <label for="travel_className">Travel ClassName</label>
