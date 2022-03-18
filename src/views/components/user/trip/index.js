@@ -1,11 +1,13 @@
 import React from "react";
 import Trip from "./Trip";
+import NavBar from "../NavBar";
 
 function TripComponent(){
     return(
-        <>
-            <Trip />
-        </>
+        <div>
+        <NavBar/>
+         <Trip />
+        </div>
     )
 }
 
