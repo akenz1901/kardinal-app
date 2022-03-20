@@ -3,7 +3,7 @@ import './dashboard.css';
 
 function Modal(){
     return(
-        <div className="modal fade" id="fundYourAccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div className="modal fade" id="fundYourAccount" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -33,8 +33,7 @@ function Modal(){
                                 </div>
                                 <div className="tab-pane fade" id="justify-pills-profile" role="tabpanel" aria-labelledby="justify-pills-profile-tab">
                                     <p style={{fontSize: "1rem", textAlign: "left", lineHeight: "20px"}} className="mb-4">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-                                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.                                                
+                                        Card Payment coming soon.......                
                                     </p>
                                 </div>
                             </div>
