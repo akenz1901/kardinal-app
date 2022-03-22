@@ -1,13 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Modal from './Modal';
 import ReactApexChart from 'react-apexcharts';
 import { optionVisitors } from '../../../../utilities/scripts';
-import NavBar from '../NavBar'
+import api from '../../actions/apiServices';
 
 function Main(){
+    const [credit, setCredit] = useState(null)
+    const [wallet, setWallet] = useState(null)
+    // const [spending, setSummary] = useState(null)
+    React.useEffect(() => {
+        api
+        .fetch('/api/finance/credit_balance/', {},true)
+        .then(response =>{
+            setCredit(response.data[0])
+            console.log(credit.balance)
+            
+        })
+        .catch(err => {console.log(err)}),
+        api
+        .fetch('/api/finance/fundwallet/', {},true)
+        .then(response =>{
+            setWallet(response.data[0])
+            console.log(wallet.balance)
+        }).catch(err => {console.log(err)}),
+
+        // api
+        // .fetch('/api/finance/transactions_summary', {},true)
+        // .then(response =>{
+        //     setSummary(response.data[0])
+        // }).catch(err => {console.log(err)})
+        // , 
+        []
+    })
+
     return(
         <>
-        <NavBar/>
         <div className="main-container" id="container">
             <div className="overlay"></div>
             <div className="search-overlay"></div>         
@@ -22,7 +49,7 @@ function Main(){
                                 <button type="button" className="btn btn-primary mb-2 mr-2" data-toggle="modal" href="#fundYourAccount">
                                     Fund your account
                                 </button>
-                            </div>
+                            </div> 
                             {/* <!-- Modal --> */}
                             <Modal />
                         {/* <!-- Modal End--> */}
@@ -32,7 +59,7 @@ function Main(){
                                 <div className="widget widget-chart-three">
                                     <div className="widget-heading">
                                         <div className="">
-                                            <h5 className="">Revenue</h5>
+                                            <h5 className="">Trip activities</h5>
                                         </div>
                                         <div className="dropdown  custom-dropdown">
                                             <a className="dropdown-toggle" href="..." role="button" id="uniqueVisitors" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -73,11 +100,14 @@ function Main(){
                                         <div className="invoice-box"> 
                                             <div className='row balances'>
                                             <div className="acc-total-info">
-                                                <p className="acc-amount">NGN470</p>
+                                                <p className="acc-amount">NGN{credit != null ? credit.balance : ""}</p>
+
                                                 <h5>Credit Balance</h5>
-                                            </div>
+                                                </div>
+                                        
+                                            
                                             <div className="acc-total-info">
-                                                <p className="acc-amount">NGN570</p>
+                                                <p className="acc-amount">NGN{wallet != null ? wallet.balance:""}</p>
                                                 <h5>Wallet Balance</h5>
                                             </div>
                                             </div>
@@ -85,6 +115,7 @@ function Main(){
                                                 <div className="info-detail-1">
                                                     <p style={{fontWeight: "bold"}}>Total Spend</p>
                                                     <p style={{fontWeight: "bold"}}>NGN4,508.77</p>
+                                                    {/* <p style={{fontWeight: "bold"}}>NGN{spending.Total_Spend != null ? spending.Total_Spend: ''}</p> */}
                                                 </div>
                                                 <div className="info-detail-2">
                                                     <p>Travel Spend</p>
