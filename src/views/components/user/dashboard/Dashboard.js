@@ -1,18 +1,20 @@
 import React from 'react';
 import Loader from '../Loader';
 import Main from './Main';
+import NavBar from '../NavBar'
 
 function Dashboard(){
     return(
-        <body className="alt-menu sidebar-noneoverflow">
+        <div className="alt-menu sidebar-noneoverflow">
             {/* BEGIN LOADER */}
-                <Loader/>
+                {/* <Loader/> */}
             {/* END LOADER */}
+            <NavBar/>
 
             {/* BEGIN MAIN CONTAINER */}
                 <Main />
             {/* END MAIN CONTAINER */}
-        </body>
+        </div>
     )
 }
 
