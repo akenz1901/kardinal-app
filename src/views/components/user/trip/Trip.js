@@ -14,6 +14,7 @@ import GuestTravelModal from "./GuestTravelModal";
   ]
 
 function Trip(){
+
     const [isOneTime, setOneTime] = useState(false)
     const switchToOneTime = () => {
               setOneTime(true)
@@ -68,11 +69,10 @@ function Trip(){
                                             <MultiSelect option={travelers}/>
                                         </div>
                                         
-                                        {/* <div className="form-group col-md-6">
+                                        <div className="form-group col-md-6">
                                             <label for="input">Are you making a booking for a guest?</label>
-                                            <p className="form-control"><a href="#addGuestTravelerModal" data-toggle="modal" data-target="#addGuestTravelerModal">+ Add guest traveler</a></p>
-                                            <GuestTravelModal />
-                                        </div> */}
+                                            <p className="form-control"><a href="#addGuestTravelerModal" data-toggle="modal" data-target="#addGuestTravelerModal">+ Add guest traveler <GuestTravelModal /></a></p>
+                                        </div>
                                     </div>
                                     <div className="form-row mb-4">
                                         <div className="form-group col-md-12">
