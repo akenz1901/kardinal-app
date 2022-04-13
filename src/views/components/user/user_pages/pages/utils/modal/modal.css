@@ -1,0 +1,223 @@
+.payment_modal_cont {
+  width: 493px;
+  height: 579px;
+  background: #ffffff;
+  mix-blend-mode: normal;
+  border-radius: 3.56px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  outline: none;
+  padding: 50px 40px;
+}
+
+.modal_heading_top {
+  font-size: 19.2613px;
+  line-height: 24px;
+  color: #252627;
+  font-family: CircularBold;
+}
+
+.modal_sub_heading_top {
+  font-size: 10.7007px;
+  line-height: 24px;
+  color: #655f5f;
+  font-family: Circular;
+}
+
+.buttonCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.active_option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #243256;
+  width: 131.83px;
+  height: 43.23px;
+  border-radius: 5px;
+  padding: 5px;
+  outline: none;
+  border: 0.428028px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 2.93745px;
+}
+
+.active_option h4 {
+  /* button text */
+  font-size: 12.8408px;
+  line-height: 16px;
+  color: #ffffff;
+  font-family: Circular;
+  padding-left: 5px;
+  padding-top: 5px;
+  font-weight: 500;
+}
+
+.inactive_option {
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 131.83px;
+  height: 43.23px;
+  border-radius: 5px;
+  padding: 5px;
+  outline: none;
+  background: #f5f5f5;
+  border: 0.428028px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 2.93745px;
+}
+
+.inactive_option h4 {
+  font-size: 12.8408px;
+  line-height: 16px;
+  color: #243256;
+  font-family: Circular;
+  padding-left: 5px;
+  padding-top: 5px;
+  font-weight: 500;
+}
+
+.bank-payment-info {
+  font-size: 14.981px;
+  line-height: 19px;
+  color: #40798c;
+  /* font-family: Circular; */
+  font-weight: 500;
+}
+
+.banktransfercont {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-cont {
+  width: 100%;
+  height: 174.21px;
+  background: rgba(222, 227, 239, 0.15);
+  border: 0.428028px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 3.18091px;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0 20px;
+  position: relative;
+}
+
+.info-cont h4 {
+  font-size: 13.2538px;
+  line-height: 17px;
+  color: #000;
+  font-weight: 500 !important;
+  text-transform: none;
+  letter-spacing: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  font-family: 'CircularStdBold';
+}
+
+.info-cont h3 {
+  font-size: 13.2538px;
+  line-height: 17px;
+  color: #000;
+  font-weight: 500 !important;
+  text-transform: none;
+  letter-spacing: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  font-family: 'CircularStdBook';
+}
+
+.copy-icon {
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+  cursor: pointer;
+}
+
+.send-money-btn {
+  width: 206.74px;
+  height: 39.4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 0.428028px solid #e5e5e5;
+  border-radius: 2.67696px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  font-size: 14.0426px;
+  line-height: 18px;
+  color: #252627;
+  font-family: Circular;
+}
+
+.cancel-payment {
+  font-size: 12.6326px;
+  line-height: 16px;
+  color: #655f5f;
+  font-family: Circular;
+  width: 134.43px;
+  height: 24.16px;
+  background-color: transparent;
+  border-width: 0;
+  align-self: center;
+  margin: 5px 0;
+}
+
+.USSD {
+  display: flex;
+  flex-direction: column;
+}
+
+.fitCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fitCenter h1 {
+  font-size: 32.3287px;
+  line-height: 41px;
+  color: #dcdbdb;
+  font-family: Circular;
+}
+
+form {
+  padding: 20px 10px;
+}
+
+.card_number {
+  width: 100%;
+  height: 30px;
+  background: #ffffff;
+  border: 0.428028px solid #e5e5e5;
+  border-radius: 2.69257px;
+  margin: 10px 0;
+}
+
+.card_number::placeholder, .corporate_card_input::placeholder {
+  font-family: Circular;
+  font-size: 13.25px;
+  line-height: 17px;
+  color: rgba(101, 95, 95, 0.5);
+  padding: 0 10px;
+}
+
+.corporate_card_input {
+  width: 40%;
+  height: 30px;
+  background: #ffffff;
+  border-radius: 2.69257px;
+  margin: 10px 0;
+  margin-right: 30px;
+  border: 0.428028px solid #e5e5e5;
+}

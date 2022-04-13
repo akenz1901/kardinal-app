@@ -1,0 +1,46 @@
+.reporting {
+  /* margin: 5%; */
+}
+
+.reporting h1 {
+  font-size: 25.7548px;
+  line-height: 33px;
+  font-family: Circular;
+  color: #000000;
+}
+
+.r-sectioning {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid;
+}
+
+.vitualization {
+  background: url("../../assets/report/1x/Asset\ 5.png") no-repeat center;
+  background-size: contain;
+  height: 928.9741px;
+  width: 100%;
+  padding: 5%;
+}
+
+.topAirline {
+  border: 1px solid;
+  height: 200.6236px;
+  width: 300px;
+}
+
+.part-debit {
+  width: 25%;
+  height: 928.9741px;
+  border: 1px solid;
+}
+
+.part-debit h1 {
+  font-size: 11.24px;
+  line-height: 33px;
+  font-family: Circular;
+  color: #243256;
+
+}

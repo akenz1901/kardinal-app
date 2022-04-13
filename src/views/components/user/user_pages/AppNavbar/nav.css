@@ -1,0 +1,65 @@
+.appbar {
+  box-shadow: 3.85496px 3.85496px 3.85496px rgba(0, 0, 0, 0.13);
+  padding: 0;
+}
+
+.menu-items {
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100%;
+  gap: 20px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.navLink h3 {
+  color: #243256;
+  font-size: 15.461px;
+  line-height: 20px;
+  padding-top: 8px;
+  font-weight: 500;
+  border:0;
+  margin-bottom: 0;
+  font-family: CircularMedium!important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 0 !important;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-info h3 {
+  font-size: 20px;
+  line-height: 25px;
+  color: #243256;
+  font-family: Circular;
+  padding-top: 10px;
+  border: 0;
+  font-weight: 500;
+  font-family: CircularMedium!important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 0 !important;
+}
+
+/* .css-pg75h3{
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentcolor;
+  flex-shrink: 0;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: rgb(64, 121, 140);
+  font-size: 25px;
+} */

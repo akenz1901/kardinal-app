@@ -1,0 +1,16 @@
+.btn-primary {
+    background-color: #243256 !important;
+    border-radius: 6.71812px !important;
+    font-size: 17.2949px !important;
+    /* line-height: 22px; */
+    color: #fff !important;
+    border: 0 !important;
+    min-width: 115.56px !important;
+    text-align: center !important;
+}
+.row>* {
+    flex-shrink: 0 !important;
+    width: auto !important;
+    /* max-width: 100% !important; */
+    margin-top: var(--bs-gutter-y) !important;
+}
