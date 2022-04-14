@@ -1,27 +1,29 @@
 // const API = process.env.SERVER_API_DEVELOPMENT;
-
 import axios from "axios";
 import swal from "sweetalert";
 
 export const API = "http://kardinal-api.herokuapp.com"
 
-const token = () => localStorage.getItem("token");
+const token = localStorage.getItem("token")
 
 function headers() {
   return {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: `Token ${token()}`
   };
 }
 
-function authHeaders() {
+export function authHeaders() {
   return {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: `Token ${token()}`
+    Authorization: `Token ${token}`
   }
 }
+
+// function parseResponse(response) {
+//   return Promise.resolve(response?.data)
+// }
 
 function parseResponse(response) {
   return response?.data
@@ -35,9 +37,10 @@ function queryString(params) {
 }
 
 const api = {
+
   fetch(url, params = {}, auth = false) {
     return axios.get(`${API}${url}${queryString(params)}`, {
-      headers: auth === true ? authHeaders() : headers(),
+      headers: auth ? authHeaders() : headers(),
       validateStatus: (status) => {
         return status >= 200 && status < 500 // default
       }
@@ -53,12 +56,12 @@ const api = {
     return axios.post(`${API}${url}`, body, {
       headers: auth ? authHeaders() : headers(),
     validateStatus: (status) => {
-      return status >= 200 && status < 500 // default
+      return status >= 200 && status < 400 // default
     }
     })
     .then(parseResponse)
       .catch(err => {
-       console.log(err)
+       swal(err)
       })
   },
 
@@ -103,5 +106,9 @@ const api = {
       })
   }
 };
+
+export const TokenValue = () => {
+  return token.apply
+}
 
 export default api;
