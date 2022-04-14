@@ -4,6 +4,7 @@ import Tab from 'react-bootstrap/Tab'
 import Form from 'react-bootstrap/Form'
 import './style.css'
 import FlightLoader, { HotelLoader } from './loader'
+import { SearchInternationalFlightsOneway, SearchInternationalFlightsReturn } from './flight_actions'
 
 // Material ui icon imports
 import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
@@ -12,6 +13,7 @@ import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
 import HouseboatOutlinedIcon from '@mui/icons-material/HouseboatOutlined';
 import DatePicker from "react-multi-date-picker"
 import PassangerDetails from './PassangerDetail'
+
 const Trips = () => {
     const [openModal, setOpenModal] = useState(false);
     return (
@@ -46,6 +48,7 @@ const FlightTab = ({ setOpenModal}) => {
     const handleRadioChange = event => {
         setTripType(event.target.value);
     }
+
     return (
         <div>
             <section className='f-sec1'>
@@ -62,15 +65,15 @@ const FlightTab = ({ setOpenModal}) => {
             <section className='f-sec2'>
                 <div className='select-trips'>
                     <label>
-                        <input type={'radio'} name='trip' value={'Roundtrip'} onChange={(e) => handleRadioChange(e)} />
+                        <input type={'radio'} className="active" name='trip' value={'roundtrip'} onChange={(e) => handleRadioChange(e)} />
                         Roundtrip
                     </label>
                     <label>
-                        <input type={'radio'} name='trip' value={'Oneway'} onChange={(e) => handleRadioChange(e)} />
+                        <input type={'radio'} name='trip' value={'oneway'} onChange={(e) => handleRadioChange(e)} />
                         Oneway
                     </label>
                     <label>
-                        <input type={'radio'} name='trip' value={'Multicity'} onChange={(e) => handleRadioChange(e)} />
+                        <input type={'radio'} name='trip' value={'multicity'} onChange={(e) => handleRadioChange(e)} />
                         Multicity
                     </label>
                     <label>
@@ -132,8 +135,39 @@ const FlightTab = ({ setOpenModal}) => {
     )
 }
 
+
 const TripsType = ({ tripType }) => {
     const [multiCityList, setMultiCityList] = useState(['one', 'two']);
+    const [from, setFrom] = useState('')
+    const [to, setTo] = useState('')
+    const [from2, setFrom2] = useState('')
+    const [to2, setTo2] = useState('')
+    const [departureDate1, setDepartureDate1] = useState('')
+    const [departureDate2, setDepartureDate2] = useState('')
+    const [numberOfAdults, setNumberOfAdult] = useState('')
+
+    const returnData = {
+        flight_type:tripType,
+        from1:from,
+        to1:to,
+        departure_date1:departureDate1,
+        adults:numberOfAdults,
+        from2:from2,
+        to2:to2,
+        departure_date2:departureDate2
+    }
+
+    const onewayData = {
+        flight_type:tripType,
+        from1:from,
+        to1:to,
+        departure_date1:departureDate1,
+        adults:2
+    }
+
+    SearchInternationalFlightsOneway(onewayData)
+
+
     let addTrip = () => {
         let newTrip = ['new', ...multiCityList]
         setMultiCityList(newTrip)
@@ -145,16 +179,21 @@ const TripsType = ({ tripType }) => {
     }
     return (
         <>
-            {tripType === 'Roundtrip' && <div className='flight-information'>
+            {tripType === 'roundtrip' && <div className='flight-information'>
                 <label>
                     Departure
                     <div className='select-flight-infos'>
                         <FlightTakeoffOutlinedIcon sx={{ color: '#40798C', fontSize: 25, marginBottom: 1 }} />
-                        <Form.Select aria-label="Default select example" style={{ width: '150px' }}>
+                        <Form.Select 
+                        aria-label="Default select example" 
+                        style={{ width: '150px' }}
+                        onChange={e => setTo(e.target.value)}
+                        value={from}
+                        >
                             <option>From</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="1">ABV</option>
+                            <option value="2">LOS</option>
+                            <option value="3">MIA</option>
                         </Form.Select>
                     </div>
                 </label>
@@ -162,11 +201,16 @@ const TripsType = ({ tripType }) => {
                     Destination
                     <div className='select-flight-infos'>
                         <FlightLandOutlinedIcon sx={{ color: '#40798C', fontSize: 25, marginBottom: 1 }} />
-                        <Form.Select aria-label="Default select example" style={{ width: '160px' }}>
+                        <Form.Select 
+                        aria-label="Default select example" 
+                        style={{ width: '160px' }} 
+                        onChange={e => setFrom(e.target.value)}
+                        value={from}
+                        >
                             <option>To</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="1">ABV</option>
+                            <option value="2">LOS</option>
+                            <option value="3">MIA</option>
                         </Form.Select>
                     </div>
                 </label>
@@ -185,16 +229,19 @@ const TripsType = ({ tripType }) => {
                     </div>
                 </label>
             </div>}
-            {tripType === 'Oneway' && <div className='flight-information'>
+            {tripType === 'oneway' && <div className='flight-information'>
                 <label>
                     Departure
                     <div className='select-flight-infos'>
                         <FlightTakeoffOutlinedIcon sx={{ color: '#40798C', fontSize: 25, marginBottom: 1 }} />
-                        <Form.Select aria-label="Default select example" style={{ width: '150px' }}>
+                        <Form.Select aria-label="Default select example" style={{ width: '150px' }} 
+                        onChange={e => setTo(e.target.value)}
+                        value={from}
+                        >
                             <option>From</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="ABV">ABV</option>
+                            <option value="LOS">LOS</option>
+                            <option value="MIA">MIA</option>
                         </Form.Select>
                     </div>
                 </label>
@@ -202,11 +249,14 @@ const TripsType = ({ tripType }) => {
                     Destination
                     <div className='select-flight-infos'>
                         <FlightLandOutlinedIcon sx={{ color: '#40798C', fontSize: 25, marginBottom: 1 }} />
-                        <Form.Select aria-label="Default select example" style={{ width: '160px' }}>
+                        <Form.Select aria-label="Default select example" style={{ width: '160px' }}
+                        onChange={e => setFrom(e.target.value)}
+                        value={from}
+                        >
                             <option>To</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="ABV">ABV</option>
+                            <option value="LOS">LOS</option>
+                            <option value="MIA">MIA</option>
                         </Form.Select>
                     </div>
                 </label>
@@ -214,14 +264,17 @@ const TripsType = ({ tripType }) => {
                     Start Date
                     <div className='select-flight-infos' >
                         <EventOutlinedIcon sx={{ color: '#40798C', fontSize: 25, marginRight: 1 }} />
-                        <input type={'date'} />
+                        <input type={'date'} 
+                        onChange={e => setDepartureDate1(e.target.value)} 
+                        value={departureDate1}
+                        />
                     </div>
                 </label>
                 <label className='cancel_trip'>
                     cancel
                 </label>
             </div>}
-            {tripType === 'Multicity' &&
+            {tripType === 'multicity' &&
                 <>
                     {multiCityList.map((_, index) => {
                         return (
