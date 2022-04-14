@@ -6,7 +6,7 @@ function FlightLoader({ enableModal, setEnableModal }) {
     let navigate = useNavigate();
     useEffect(() => {
         setTimeout(() => {
-            navigate('search-flight');
+            navigate('flights');
             setEnableModal(false)
         }, 1000);
     }, []);
