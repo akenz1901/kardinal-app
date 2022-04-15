@@ -2,6 +2,9 @@
 .topbar-nav {
 
 }
+svg{
+  padding: 0 !important;
+}
 
 .feather {
     width: 34px !important;

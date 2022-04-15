@@ -1,12 +1,12 @@
 import React from 'react';
 import SideBar from '../SideBar';
-import Dashboard from './Dashboard';
+import DashboardMain from './Dashboard';
 
 function DashboardComponent(){
     return(
         <>
         <SideBar />
-          <Dashboard />  
+          <DashboardMain />  
         </>
     )
 }

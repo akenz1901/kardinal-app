@@ -6,7 +6,6 @@ import CompanyProfileComponent from "./CompanyProfile";
 
 function Setting(){
 
-
     return(
         <div className="main-container" id="container">
             <div className="overlay"></div>

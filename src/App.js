@@ -1,9 +1,8 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter} from "react-router-dom";
 import Login from "./views/components/actions/Login";
-import DashboardPage from './views/pages/AppPages/dashboard-one-page';
-import Footer from './views/components/user/Footer';
 import AccountPage from './views/pages/AppPages/accounting-page';
 import InvoicePage from './views/pages/AppPages/invoice-page';
 import ProfilePage from './views/pages/AppPages/profile-page';
@@ -15,24 +14,19 @@ import Onboarding from './views/components/actions/Registration';
 import ResetPasswordPage from './views/pages/AppPages/reset-password-page';
 import HomeComponents from './views/components/index';
 import Customer from './views/components/customer/Customer'
-// import PrivateRoute from './privateRoute';
-// import WebApp from './layout/web-app';
+import DashboardMain from './views/components/user/dashboard/Dashboard';
+import FlightSummary from './views/components/user/user_pages/pages/flight_summary';
+import FlightPage from './views/components/user/user_pages/pages/trips/FlightPage';
 
-// const Login = React.lazy(() => import("./views/components/authentication/Login"));
-// const Onboarding = React.lazy(() => import("./views/components/authentication/Registration"));
-// const Dashboard = React.lazy(() => import("./layout/web-app"));
-// const Home = React.lazy(() => import("./layout/website"));
-// export const Backdrop = () => {
-//   return(
-//     <div className='backdrop'></div>
-//   )
-// }
 function App() {
   return (
     <>
+    {/* <AppContext.Provider value={{isAuthenticated, userHasAuthenticated}}>
+
+    </AppContext.Provider> */}
     <BrowserRouter>
       <div className='App'>
-        <Routes>
+      <Routes>
         <Route exact 
             path='/' 
             name="Home" 
@@ -41,10 +35,17 @@ function App() {
         />
         <Route exact 
             path='/customer' 
-            name="Home" 
+            name="Customer" 
             element={<Customer />}
             />
-        {/* <NavBar /> */}
+
+        <Route
+          exact
+          path="/login"
+          name="Login"
+          element={<Login />}
+        />
+    
         <Route
           exact
           path="/account"
@@ -55,7 +56,7 @@ function App() {
           exact
           path="/dashboard"
           name="Dashboard"
-          element={<DashboardPage />}
+          element={<DashboardMain />}
         />
         <Route
           exact
@@ -85,6 +86,11 @@ function App() {
           exact
           path="/trip"
           name="Trip"
+          element={<FlightPage />}
+        />
+
+        <Route 
+        exact path="/trip/flights"
           element={<TripPage />}
         />
         <Route
@@ -100,24 +106,24 @@ function App() {
           name="ResetPassword"
           element={<ResetPasswordPage />}
         />
-        <Route
-          exact
-          path="/login"
-          name="Login"
-          element={<Login />}
-        />
+        
         <Route
           exact
           path="/register"
           name="register"
           element={<Onboarding />}
         />
+
+        <Route exact path='/flight-summary' element={<FlightSummary />}/>
+        <Route path="*" element={<NoResource />} />
         </Routes>
-        <Footer />
       </div>
     </BrowserRouter>
     </>
   );
+}
+const NoResource = () => {
+  return <h1>ERROR 404</h1>
 }
 
 export default App;
