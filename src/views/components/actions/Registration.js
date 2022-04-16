@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
-import AuthContainer from "./AuthContainer";
+import React, { useState } from "react";
+import Form from 'react-bootstrap/Form'
+import AuthContainer from "./AuthContainer.js";
+import { useNavigate } from "react-router";
 import onboarding from "../../../assets/general-assets/onboarding/images/slide-1.svg";
 import onboarding_slide_2 from "../../../assets/general-assets/onboarding/images/slide-2.svg";
 import onboarding_slide_3 from "../../../assets/general-assets/onboarding/images/slide-3.svg";
@@ -29,25 +31,7 @@ function Onboarding() {
   const [creditPeriod, setCreditPeriod] = useState("");
   const [monthlySpend, setMonthlySpend] = useState("");
   const [annualTravelBudget, setAnnualTravelBudget] = useState("");
-  const initialValues = {
-    firstName:firstName,
-      lastName:lastName,
-      number:number,
-      password:password,
-      companyName:companyName,
-      companySize:companySize,
-      userName:userName,
-      code:code,
-      location: locate,
-      role:role,
-      credit:credit,
-      email:email,
-      amount:amount,
-      period:creditPeriod,
-      volume:monthlySpend,
-      budget:annualTravelBudget,
-  }
-  const [formErrors, setFormErrors] = useState({});
+  const [isTrue, setCreditStatus] = useState(false)
 
   const decrement = () => {
     setPage(page - 1);
@@ -69,70 +53,20 @@ function Onboarding() {
     setCredit(e.target.value)
   }
   const setBackCreditPage = () => {
-    if(credit === "show"){
+    if(credit === "false"){
     setCredit("hide")
     }else{
       setCredit("show");
     };
   };
-  const validate = (values) => {
-    const errors = {firstName: "First name is required"};
-    const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/;
-    if ( !values.firstName ) {
-      errors.firstName = "First Name is Required !"
-    };
-    if ( !values.lastName ) {
-      errors.lastName = "Last Name is Required !"
-    };
-    if ( !values.number ) {
-      errors.number = "Phone Number is Required !"
-    };
-    if ( !values.password ) {
-      errors.password = "Password is Required"
-    }else if ( !passwordRegex.test(values.password) ){
-      errors.password = `Password must contain at 
-      least 8 characters, 1 uppercase, 1 lowercase, 
-      1 number and 1 special case character !`
-    }
-    if ( !values.companyName ) {
-      errors.companyName = "Company Name is Required !"
-    };
-    if ( !values.companySize ) {
-      errors.companySize = "Company Size is Required !"
-    };
-    if ( !values.userName ) {
-      errors.userName = "Username is Required !"
-    };
-    if ( !values.locate ) {
-      errors.locate = "Locate is Required !"
-    };
-    if ( !values.role ) {
-      errors.role = "Role is Required !"
-    };
-    if ( !values.credit ) {
-      errors.credit = "Choosing either Yes or No is Required !"
-    };
-    if ( !values.amount ) {
-      errors.amount = "Amount is Required !"
-    };
-    if ( !values.creditPeriod ) {
-      errors.creditPeriod = "Credit Period is Required !"
-    };
-    if ( !values.monthlySpend ) {
-      errors.monthlySpend = "Monthly Spend is Required !"
-    };
-    if ( !values.annualTravelBudget ) {
-      errors.annualTravelBudget = "Annual Travel Budget is Required !"
-    };
-  };
-  // useEffect(() => {
-  //   console.log(formErrors);
-  //   if ( Object.keys(formErrors).length === 0 && isSubmit ) {
-  //     console.log(formValues);
-  //   };
-  // }, [formErrors])
-  const registerUser = () => {
+  if(credit === "true"){
+    setCreditStatus(true)
+  }
+
+  const navigation = useNavigate();
+
+  const registerUser = (e) => {
+    e.preventDefault();
     let data = {
       firstName:firstName,
       lastName:lastName,
@@ -140,7 +74,8 @@ function Onboarding() {
       password:password,
       companyName:companyName,
       companySize:`${companySize === "10" ? 10 : 
-                    companySize === "50" ? 50 : companySize === "500" ? 500 : 
+                    companySize === "50" ? 50 : 
+                    companySize === "500" ? 500 : 
                     companySize === "1000" ? 1000 : null}`,
       userName:userName,
       code:code,
@@ -153,6 +88,7 @@ function Onboarding() {
       volume:monthlySpend,
       budget:annualTravelBudget,
     };
+    
     setIsSubmit(true);
     setTimeout(() => {
       setIsSubmit(false)
@@ -161,6 +97,7 @@ function Onboarding() {
     RegisterUser(data).then((res) => {
       res ? setPage(page + 1) : setPage(3);
     });
+    navigation('/login', {replace: true})
   };
   const codeSender = async (e, email) => {
     e.preventDefault();
@@ -180,18 +117,26 @@ function Onboarding() {
     CodeConfirmation(info).then((res) => setSent(res));
   };
 
+  // function validateForm() {
+  //   return username.length > 0 && password.length >= 8;
+  // }
+
 
 
   // setTimeout(() => {
   //   setIsSubmit(false)
   // }, 3000)
+
+  const setPageToOne = () =>{
+    return setPage(page = 1)
+  }
  
   let register;
   register = (
     <>
     <NavBarHome/>
       <div className="wrapper">
-      <form onSubmit={registerUser} action="" id="wizard">
+      <Form onSubmit={registerUser} id="wizard">
         <div className="content">
           {/* <!-- SECTION 1 --> */}
           {/* <h2></h2> */}
@@ -228,13 +173,16 @@ function Onboarding() {
                 <a
                   id="wizard-t-1"
                   className="row"
-                  href="#wizard-h-1"
+                  href='#'
+                  
                   aria-controls="wizard-p-1"
+                
                 >
                   <span
                     className={
                       page >= 2 ? "span-animate number" : "number"
                     }
+                    
                   ></span>
                   <div
                     className={page > 2 ? "div-animate number" : "number"}
@@ -301,7 +249,7 @@ function Onboarding() {
                   <div className="input-group mb-3">
                     <>
                     <label htmlFor="email">
-                      Please put in your work email
+                      Please type in your work email
                     </label>
                     <input
                       type="text"
@@ -310,7 +258,7 @@ function Onboarding() {
                       placeholder="Work email"
                       ariaLabel="Work email"
                       aria-describedby="basic-addon2"
-                      type="email"
+                      // type="email"
                       id="email"
                       name="email"
                       value={email}
@@ -321,8 +269,8 @@ function Onboarding() {
                         className="btn btn-control"
                         type="submit"
                       >
-                        {sent ? <div className="text-dark" role="status">
-                          <span className="sr-only"></span>                   
+                        {sent ? <div className=" text-dark" role="status">
+                          <span className="sr-only login-sr"></span>                   
                         </div>: "Send code"}
                                                 
                       </button>
@@ -368,7 +316,7 @@ function Onboarding() {
                         className="btn btn-control"
                         type="submit"
                       >
-                        {sent ? <div className="spinner-border text-dark" role="status">
+                        {sent ? <div className=" text-dark" role="status">
                           <span className="sr-only">Loading...</span>
                         </div>: "Verify"}
                       </button>
@@ -404,7 +352,7 @@ function Onboarding() {
                         onChange={e => setFirstName(e.target.value)}
                         id="firstName"
                       />
-                      {console.log("First name::",firstName)}
+                      {/* {console.log("First name::",firstName)} */}
                   
                     </div>
                     <div className="col">
@@ -565,7 +513,7 @@ function Onboarding() {
                         <select 
                           className="form-control" 
                           value={amount}
-                          required
+                          required={isTrue}
                           onChange={e => setAmount(e.target.value)}
                         >
                           <option>Credit Amount</option>
@@ -582,7 +530,7 @@ function Onboarding() {
                         <select 
                           className="form-control" 
                           value={creditPeriod}
-                          required
+                          required={isTrue}
                           onChange={e => setCreditPeriod(e.target.value)}
                         >
                           <option>Credit period</option>
@@ -594,7 +542,7 @@ function Onboarding() {
                     <div className="form-group mb-2">
                         <input 
                           type="number"
-                          required 
+                          required={isTrue}
                           className="form-control" 
                           placeholder="Estimated travel monthly spend" 
                           value={monthlySpend}
@@ -605,7 +553,7 @@ function Onboarding() {
                     <div className="form-group mb-2">
                         <input 
                           type="number"
-                          required 
+                          required={isTrue}
                           className="form-control"  
                           placeholder="Estimated annual travel budget" 
                           value={annualTravelBudget}
@@ -649,7 +597,7 @@ function Onboarding() {
                         className="nav-link active"
                         id="invite_by_email_tab"
                         data-toggle="pill"
-                        href="#invite_by_email"
+                        href="#"
                         role="tab"
                         aria-controls="justify-pills-home"
                         ariaSelected="true"
@@ -662,7 +610,7 @@ function Onboarding() {
                         className="nav-link"
                         id="invite_by_link_tab"
                         data-toggle="pill"
-                        href="#invite_by_link"
+                        href="#"
                         role="tab"
                         aria-controls="justify-pills-profile"
                         ariaSelected="false"
@@ -784,28 +732,30 @@ function Onboarding() {
                 
               ):null}
               { page === 4 ? (
-                <li
+                <button
                   hidden={sent}
-                  onClick={() => registerUser()}
+                  // onClick={() => registerUser()}
                   ariaDisabled="false"
-                  className=""
+                  className="btn btn-primary mb-2"
+                  href="/login"
                 >
-                  <a
+                  {/* <a
                     href="#next"
                     role="menuitem"
                     className="btn btn-primary mb-2"
-                  >
+                  > */}
+                  {/* spinner-border */}
                     {isSubmit ? 
-                      <div class="spinner-border text-dark" role="status">
+                      <div class=" text-dark" role="status">
                           <span className="sr-only login-sr">Loading...</span>
-                      </div>: "Resgister"}
-                  </a>
-                </li>
+                      </div>: "Register"}
+                  {/* </a> */}
+                </button>
               ) : null}
             </ul>
           </div>
         </div>
-      </form>
+      </Form>
     </div>
   </>
   );

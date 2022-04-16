@@ -1,11 +1,12 @@
 import React from "react";
 import api from "./apiServices";
 import swal from "sweetalert";
+
+// import token from "surge/lib/middleware/token";
 // import { history } from "../../../history";
 // import { FETCH_ONBOARDING } from "./types";
 
 // import { Storage } from "../../../utilities/storage/storage";
-
 export const EmailValidation = async (data) => {
   let email = data.workEmail;
   let body = {
@@ -38,8 +39,9 @@ export const CodeConfirmation = async (info) => {
   return await api
     .post(`/api/accounts/confirm_email`, data)
     .then((response) => {
-      const responseData = response;
-      if (responseData.message !== "failed") {
+
+      console.log(response.message)
+      if (response.message !== "failed") {
         setTimeout(
           swal(
             "Congratulations, you are now being redirected to the next page" 
@@ -52,7 +54,7 @@ export const CodeConfirmation = async (info) => {
       }
       return false;
     })
-    .catch((err) => {});
+    .catch((err) => {console.log()});
 };
 
 export const RegisterUser = async (info) => {
@@ -76,11 +78,13 @@ export const RegisterUser = async (info) => {
   return await api
     .post(`/auth/registration/`, data)
     .then((response) => {
-      const responseData = response;
-      if (responseData.message !== "failed") {
-        localStorage.setItem(
-          "token", (JSON.stringify(responseData.key))
+      console.log(response.key)
+      console.log(response.status)
+      if (response.message !== "failed") {
+         localStorage.setItem(
+          "token", (JSON.stringify(response.key))
         )
+        // console.log(token)
         setTimeout(
           swal(
             "Congratulations, you are now being redirected to the next page"
@@ -89,11 +93,11 @@ export const RegisterUser = async (info) => {
         );
         return true;
       } else {
-        setTimeout(swal(responseData.data), 3000);
+        setTimeout(swal(response.data), 3000);
       }
       return false;
     })
-    .catch((err) => {});
+    .catch((err) => {console.log(err)});
 };
 
 export const LoginService = async (info) => {
@@ -104,25 +108,25 @@ export const LoginService = async (info) => {
   return await api
     .post(`/auth/login/`, data)
       .then((response) => {
-        let responseData = response.key;
-        console.log(responseData)
+        // let responseData = response.key;
+        console.log(response.key)
             localStorage.setItem(
-              "token", (JSON.stringify(responseData))
+              "token", (response.key)
             );
             setTimeout(
-              swal(
-                "Welcome back, you are now being redirected to your account."
-              ),
+              console.log("Something happened"),
               3000
             );
             return true;
         }
       )
-    .catch((err) => {
-      setTimeout(() => {
-        return swal(err.data.message)
-      }, 3000);
-    });
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+    }});
+
 }
 
 export const PasswordResetCode = async (data) => {
@@ -178,26 +182,6 @@ export const PasswordReset = async (info) => {
     .catch((err) => {});
 };
 
-// export function appLogout (dispatch){
-//     const email = Storage.getItem("user")["username"];
-//     const body = {email: email};
-//     api
-//       .post("/api/users/logout", body)
-//       .then(() => {
-//         Storage.removeItem("user");
-//         dispatch({ type: "LOGOUT" });
-//         history.push("/login");
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//     }
-
-// export const setCurrentUsers = (response) => {
-//   console.log(response);
-//   return (dispatch) =>
-//     dispatch({ type: "AUTHENTICATION_SUCCESS", response });
-// };
 
 /*----------------------
       SETTINGS

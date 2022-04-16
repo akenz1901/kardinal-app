@@ -1,37 +1,71 @@
 import React, { useState } from "react";
-import AuthContainer from "./AuthContainer";
-import { createBrowserHistory } from "history";
+import AuthContainer from "./AuthContainer.js";
+// import { createBrowserHistory } from "history";
 import login_slide from "../../../assets/general-assets/onboarding/images/login-slide.svg";
 import NavBarHome from '../home/NavBarHome'
 import { LoginService } from "."
+import Form from 'react-bootstrap/Form'
+import {useNavigate} from 'react-router-dom'
+import swal from "sweetalert";
+import { _isUndefined } from "gsap/gsap-core";
+import './login.css'
 
 function Login() {
-    const [page, setPage] = useState(1);
     const [isLogin, setIsLogin] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    // const [isAuthenticated, userHasAuthenticated] = useState(false)
 
-    let history = createBrowserHistory();
-    const LoginUser = (e) => {
+    let navLinks = useNavigate();
+
+    function validateForm() {
+        return username.length > 0 && password.length >= 8;
+      }
+
+      const handleSubmit = (e) => {
         e.preventDefault();
-        const data = {
-            username: username,
-            password: password
-        };
-        LoginService(data).then((res) => {
-            res ? history.push('/dashboard') : setPage(page);
-        });
-        setIsLogin(true);
-        setTimeout(() => {
-            return setIsLogin(false);
-        }, 3000)
-    };
+
+        // const LoginUser = () => {
+            const data = {
+                username: username,
+                password: password
+            };
+            try{
+            LoginService(data).then((res) => {
+                console.log(res.status) //new
+                setTimeout(3000)
+                if(localStorage.getItem("token") === null){
+                    
+                }else{
+                    handleClick()
+                    // setIsLogin(true);
+                }
+            });
+        }catch(e){
+            console.log(e)
+        }finally{    
+                setTimeout(() => {
+                    return setIsLogin(false);
+                }, 4000)
+        }
+        
+            
+        // };
+    }
+
+    const handleClick = () =>{
+        navLinks("/dashboard", {replace: true})
+    }
+
+
+    // let history = createBrowserHistory();
     let login;
     login = (
         <>
         <NavBarHome />
         <div className="wrapper">
-            <form onSubmit={LoginUser}  id="wizard">
+           {/* <form> */}
+           <Form onSubmit={handleSubmit}>
                 <section>
                     <div className="inner">
                         <div className="image-hold">
@@ -68,6 +102,7 @@ function Login() {
                                     onChange={e => setPassword(e.target.value)}
                                     className="form-control" 
                                     id="password" 
+                                    autoFocus
                                 />
                             </div>
                             <p className="login-p">
@@ -78,14 +113,15 @@ function Login() {
                             </p>
                             <span className="row reset-bottom">
                             <button
-                                onClick={() => LoginUser()}
-                                type="submit"
-                                href="/dashboard"
                                 role="menuitem"
                                 className="btn btn-primary mb-2"
+                                type="submit"
+                                disabled={!validateForm()}
+                                onClick={() => setIsLogin(true)}
                             >
+                            {/* spinner-border */}
                                 {isLogin ? 
-                                <div class="spinner-border text-dark" role="status">
+                                <div className="spinner-border text-dark" role="status">
                                     <span className="sr-only login-sr">Loading...</span>
                                 </div>: "Login"}
                             </button>
@@ -94,7 +130,8 @@ function Login() {
                     </div>
                 </div>
             </section>
-        </form>
+            </Form>
+            {/* </form> */}
     </div>
     </>
     )

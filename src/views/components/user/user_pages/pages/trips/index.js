@@ -44,7 +44,7 @@ const Trips = () => {
 
 const FlightTab = ({ setOpenModal}) => {
     const [enableModal, setEnableModal] = useState(false);
-    const [tripType, setTripType] = useState('Roundtrip');
+    const [tripType, setTripType] = useState('roundtrip');
     const handleRadioChange = event => {
         setTripType(event.target.value);
     }
@@ -164,8 +164,6 @@ const TripsType = ({ tripType }) => {
         departure_date1:departureDate1,
         adults:2
     }
-
-    SearchInternationalFlightsOneway(onewayData)
 
 
     let addTrip = () => {

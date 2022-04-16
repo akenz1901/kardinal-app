@@ -13,6 +13,7 @@ var _sweetalert = _interopRequireDefault(require("sweetalert"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+// import token from "surge/lib/middleware/token";
 // import { history } from "../../../history";
 // import { FETCH_ONBOARDING } from "./types";
 // import { Storage } from "../../../utilities/storage/storage";
@@ -64,9 +65,9 @@ var CodeConfirmation = function CodeConfirmation(info) {
           };
           _context2.next = 3;
           return regeneratorRuntime.awrap(_apiServices["default"].post("/api/accounts/confirm_email", data).then(function (response) {
-            var responseData = response;
+            console.log(response.message);
 
-            if (responseData.message !== "failed") {
+            if (response.message !== "failed") {
               setTimeout((0, _sweetalert["default"])("Congratulations, you are now being redirected to the next page"), 3000);
               return true;
             } else {
@@ -74,7 +75,9 @@ var CodeConfirmation = function CodeConfirmation(info) {
             }
 
             return false;
-          })["catch"](function (err) {}));
+          })["catch"](function (err) {
+            console.log();
+          }));
 
         case 3:
           return _context2.abrupt("return", _context2.sent);
@@ -114,18 +117,22 @@ var RegisterUser = function RegisterUser(info) {
           };
           _context3.next = 4;
           return regeneratorRuntime.awrap(_apiServices["default"].post("/auth/registration/", data).then(function (response) {
-            var responseData = response;
+            console.log(response.key);
+            console.log(response.status);
 
-            if (responseData.message !== "failed") {
-              localStorage.setItem("token", JSON.stringify(responseData.key));
+            if (response.message !== "failed") {
+              localStorage.setItem("token", JSON.stringify(response.key)); // console.log(token)
+
               setTimeout((0, _sweetalert["default"])("Congratulations, you are now being redirected to the next page"), 3000);
               return true;
             } else {
-              setTimeout((0, _sweetalert["default"])(responseData.data), 3000);
+              setTimeout((0, _sweetalert["default"])(response.data), 3000);
             }
 
             return false;
-          })["catch"](function (err) {}));
+          })["catch"](function (err) {
+            console.log(err);
+          }));
 
         case 4:
           return _context3.abrupt("return", _context3.sent);
@@ -152,15 +159,17 @@ var LoginService = function LoginService(info) {
           };
           _context4.next = 3;
           return regeneratorRuntime.awrap(_apiServices["default"].post("/auth/login/", data).then(function (response) {
-            var responseData = response.key;
-            console.log(responseData);
-            localStorage.setItem("token", JSON.stringify(responseData));
-            setTimeout((0, _sweetalert["default"])("Welcome back, you are now being redirected to your account."), 3000);
+            // let responseData = response.key;
+            console.log(response.key);
+            localStorage.setItem("token", response.key);
+            setTimeout(console.log("Something happened"), 3000);
             return true;
-          })["catch"](function (err) {
-            setTimeout(function () {
-              return (0, _sweetalert["default"])(err.data.message);
-            }, 3000);
+          })["catch"](function (error) {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
           }));
 
         case 3:
@@ -249,26 +258,7 @@ var PasswordReset = function PasswordReset(info) {
       }
     }
   });
-}; // export function appLogout (dispatch){
-//     const email = Storage.getItem("user")["username"];
-//     const body = {email: email};
-//     api
-//       .post("/api/users/logout", body)
-//       .then(() => {
-//         Storage.removeItem("user");
-//         dispatch({ type: "LOGOUT" });
-//         history.push("/login");
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//     }
-// export const setCurrentUsers = (response) => {
-//   console.log(response);
-//   return (dispatch) =>
-//     dispatch({ type: "AUTHENTICATION_SUCCESS", response });
-// };
-
+};
 /*----------------------
       SETTINGS
 ----------------------*/

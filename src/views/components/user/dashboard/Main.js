@@ -7,29 +7,28 @@ import api from '../../actions/apiServices';
 function Main(){
     const [credit, setCredit] = useState(null)
     const [wallet, setWallet] = useState(null)
-    // const [spending, setSummary] = useState(null)
+    const [summary, setSummary] = useState(null)
     React.useEffect(() => {
         api
         .fetch('/api/finance/credit_balance/', {},true)
         .then(response =>{
-            setCredit(response.data[0])
-            console.log(credit.balance)
-            
+            setCredit(response.data[0])            
         })
         .catch(err => {console.log(err)}),
+
         api
         .fetch('/api/finance/fundwallet/', {},true)
         .then(response =>{
             setWallet(response.data[0])
-            console.log(wallet.balance)
         }).catch(err => {console.log(err)}),
 
-        // api
-        // .fetch('/api/finance/transactions_summary', {},true)
-        // .then(response =>{
-        //     setSummary(response.data[0])
-        // }).catch(err => {console.log(err)})
-        // , 
+        api
+        .fetch('/api/finance/transactions_summary', {},true)
+        .then(response =>{
+            console.log(response.data[0])
+            setSummary(response.data[0])
+        }).catch(err => {console.log(err)})
+        , 
         []
     })
 
@@ -101,41 +100,44 @@ function Main(){
                                             <div className='row balances'>
                                             <div className="acc-total-info">
                                                 <p className="acc-amount">NGN{credit != null ? credit.balance : ""}</p>
-
+                                                {/* <p style={{fontWeight: "bold"}}>NGN7,608.77</p> */}
                                                 <h5>Credit Balance</h5>
                                                 </div>
                                         
                                             
                                             <div className="acc-total-info">
                                                 <p className="acc-amount">NGN{wallet != null ? wallet.balance:""}</p>
+                                                {/* <p style={{fontWeight: "bold"}}>NGN6,900.77</p> */}
                                                 <h5>Wallet Balance</h5>
                                             </div>
                                             </div>
                                             <div className="inv-detail" style={{borderBottom:"none"}}>                                        
                                                 <div className="info-detail-1">
                                                     <p style={{fontWeight: "bold"}}>Total Spend</p>
-                                                    <p style={{fontWeight: "bold"}}>NGN4,508.77</p>
+                                                    {/* <p style={{fontWeight: "bold"}}>NGN4,508.77</p> */}
+                                                    <p style={{fontWeight: "bold"}}>NGN{summary != null ? summary.total_spend:""}</p>
                                                     {/* <p style={{fontWeight: "bold"}}>NGN{spending.Total_Spend != null ? spending.Total_Spend: ''}</p> */}
                                                 </div>
                                                 <div className="info-detail-2">
                                                     <p>Travel Spend</p>
-                                                    <p>NGN8760.00</p>
+                                                    {/* <p>NGN8760.00</p> */}
+                                                    {/* <p>NGN{summary != null ? summary.travel_spend:""}</p> */}
                                                 </div>
                                                 <div className="info-detail-2">
                                                     <p>Car Spend</p>
-                                                    <p>NGN1345.00</p>
+                                                    <p>NGN{summary != null ? summary.car_spend:""}</p>
                                                 </div>
-                                                {/* <div className="info-detail-2">
+                                                {/* <div classNasme="info-detail-2">
                                                     <p>Mileage</p>
                                                     <p>NGN4,321.25</p>
                                                 </div> */}
                                                 <div className="info-detail-2">
                                                     <p>Hotel Spend</p>
-                                                    <p>NGN1345.82</p>
+                                                    <p>NGN{summary != null ? summary.hotel_spend:""}</p>
                                                 </div>
                                                 <div className="info-detail-2">
                                                     <p>Bonus Points</p>
-                                                    <p>10</p>
+                                                    <p>{summary != null ? summary.bonus_spend:""}</p>
                                                 </div>
                                             </div>
                                         </div>

@@ -6,3 +6,84 @@ body {
 /* background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%) !important; */
 
 }
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* background-color: #FF3CAC; */
+/* background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%) !important; */
+
+
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* Font Circular Std */
+/* Link: https://www.onlinewebfonts.com/fonts/Circular_Std */
+@font-face {
+  font-family: "Circular";
+  src: url("./fonts/Fonts/CircularStd-Medium.woff2");
+  /* src: url("./fonts/Circular/CircularStd-Light.otf"); */
+}
+
+@font-face {
+  font-family: "CircularRegular";
+  src: url("./fonts/Fonts/CircularStd-Black.eot");
+}
+
+@font-face {
+  font-family: "CircularMedium";
+  src: url("./fonts/Fonts/CircularStd-Medium.woff2");
+}
+
+@font-face {
+  font-family: "CircularBold";
+  src: url("./fonts/Circular/CircularStd-Bold.otf");
+}
+
+body {
+  margin: 0;
+  font-family: CircularRegular, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: CircularRegular, source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+main {
+  margin: 5% 12%;
+}
+
+@media screen and (max-width: 480px) {
+  main{
+    margin: 2%;
+  }
+}
+
+
+/* Custom heading */
+.content-heading {
+  font-family: CircularBold ;
+  font-style: normal;
+  font-size: 18.206px;
+  line-height: 23px;
+  color: #252627;
+  margin: 50px 0 10px;
+}
+
+
+/* flexing */
+.autoflex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

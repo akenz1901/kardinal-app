@@ -1,12 +1,12 @@
 .btn-primary {
-    background-color: #243256 !important;
-    border-radius: 6.71812px !important;
-    font-size: 17.2949px !important;
+    background-color: #243256;
+    border-radius: 6.71812px;
+    font-size: 17.2949px;
     /* line-height: 22px; */
-    color: #fff !important;
+    color: #fff;
     border: 0 !important;
     min-width: 115.56px !important;
-    text-align: center !important;
+    text-align: center;
 }
 .row>* {
     flex-shrink: 0 !important;

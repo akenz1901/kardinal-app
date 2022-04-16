@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import {Backdrop} from '../../../App';
 import imageOne from "../../../assets/user-assets/assets/img/90x90.jpg";
 import './index.css';
-import SideBar from './SideBar';
+import SideBar from './SideBar.js';
 
 function NavBar(){
     const [profile, setProfile] = useState(null);
     const [openUser, setOpenUser] = useState(false)
-
+    const [loggedOut, setLogOut] = useState(false)
+    
     const dropProfile = () => {
         setProfile(true ? true : false)
     }
@@ -15,8 +15,15 @@ function NavBar(){
         setOpenUser(!openUser);
         console.log(openUser)
     }
+    const logOut = () =>{
+        setLogOut(true)
+        setTimeout(() => {return setLogOut(true)}, 1000)
+        localStorage.removeItem("token")
+    }
+
     return(
         <div className="header-container">
+        {/* <a>Hello</a> */}
                 <header className="header navbar navbar-expand-sm">
                 <a onClick={dropProfile} className="sidebarCollapse" data-placement="bottom" href='...'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
@@ -40,13 +47,13 @@ function NavBar(){
                 {/* BEGIN TOPBAR */}
                 <div className="topbar-nav header navbar" role="banner">
                 <nav id="topbar">
-                    <ul className="navbar-nav theme-brand flex-row  text-center">
+                    {/* <ul className="navbar-nav theme-brand flex-row  text-center">
                         <li className="nav-item theme-logo">
-                            <a className='logo-anchor' href="/">
+                            <a className='logo-anchor' href="/"> */}
                                 {/* <img src="https://res.cloudinary.com/kardinal/image/upload/v1646050697/kardinal/logos/logo-kardinal_rlges3.png" className="navbar-logo" alt="logo" /> */}
-                            </a>
+                            {/* </a>
                         </li>
-                    </ul>
+                    </ul> */}
                 <ul className="list-unstyled menu-categories" id="topAccordion">
                     <li className="menu single-menu active">
                         <a href="/dashboard">
@@ -101,6 +108,31 @@ function NavBar(){
                             </div>
                         </a>
                     </li>
+
+                    <li className="menu single-menu">
+                        <a>
+                            <div className="nav-items">
+                                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> */}
+                                <span>           </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li className="menu single-menu">
+                        <a>
+                            <div className="nav-items">
+                                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> */}
+                                <span>           </span>
+                            </div>
+                        </a>
+                    </li>
+                    <li className="menu single-menu">
+                        <a>
+                            <div className="nav-items">
+                                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> */}
+                                <span>           </span>
+                            </div>
+                        </a>
+                    </li>
                 {/* <li className="menu single-menu">
                     <a href="/event">
                         <div className="nav-items">
@@ -120,13 +152,30 @@ function NavBar(){
                 </ul>
                 </nav>
                 </div>
+                <div className="menu menu-single">
+
+                </div>
                 {/* END TOPBAR */}
+                
                 </ul>
                     {/* <ul className="navbar-item flex-row ml-auto">
                         <li className="font-weight-bold">Username</li>
                     </ul> */}
+                    <div>
+                    <button
+                        role="menuitem"
+                        className="btn btn-primary mb-2"
+                        onClick={logOut}
+                        >
+                            
+                                {loggedOut ? 
+                                <div className="spinner-border text-dark" role="status">
+                                    <span className="sr-only login-sr">Loading...</span>
+                                </div>: <a href="/">Logout</a>}
+                            </button>
+                    </div>
 
-                    <ul className="navbar-item flex-row nav-dropdowns">
+                    <ul className="navbar-item flex-row nav-dropdowns" style={{ marginLeft:90}}>
                         <li className="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
                             <div onClick={dropUser} className="nav-link user profile-opener">
                                 <div className="media">
@@ -135,7 +184,7 @@ function NavBar(){
                                     <h6><span>Hi,</span> Alan</h6>
                                     </div> --> */}
                                 </div>
-                            {/* {/* <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> --> */}
+                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> */}
                             </div>
                             {openUser === true ? 
                             <div className="dropdown-menu">

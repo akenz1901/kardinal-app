@@ -39,6 +39,9 @@ let flightDetail = [
 
 function SearchFlight() {
   const [selected, setSelected] = useState([]);
+  const [flightsData, setFlightData] = useState(null)
+
+
   let navigate = useNavigate()
   return (
     <main>

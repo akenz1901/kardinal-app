@@ -4,6 +4,9 @@
   gap: 50px;
 }
 
+h1, h2, h3, h4, h5, h6, p, button{
+  font-family: CircularMedium !important;
+}
 .search-flight-heading-cont h2 {
   font-size: 25.9423px;
   line-height: 33px;
@@ -47,7 +50,7 @@
   color: #fff;
   border: 0;
   min-width: 115.56px !important;
-  text-align: left;
+  text-align: left !important;
 }
 
 .btn-primary:focus {
@@ -61,13 +64,15 @@
 }
 
 .dropdown-toggle::after {
-  content: "";
-  background: url("../../../../../../../assets/pages/flight_summary/Chevron.png") no-repeat
-    center;
-  background-size: contain;
-  position: absolute;
-  right: 10px;
-  top: 10px;
+  content: "" !important;
+  background: url("../../../../../../../assets/pages/flight_summary/Chevron.png") no-repeat center !important;
+  background-size: contain !important;
+  position: absolute !important;
+  right: 10px !important;
+  top: 10px !important;
+  border-right:none !important;
+  border-bottom: 0;
+  border-left: none !important;
 }
 
 .dropdown-btn {
