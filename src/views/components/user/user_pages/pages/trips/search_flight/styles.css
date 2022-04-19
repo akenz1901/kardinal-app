@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6, p, button{
   color: #fff;
   border: 0;
   min-width: 115.56px !important;
-  text-align: left !important;
+  text-align: left;
 }
 
 .btn-primary:focus {

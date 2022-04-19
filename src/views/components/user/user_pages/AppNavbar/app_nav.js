@@ -22,15 +22,15 @@ function AppNavBar() {
   let navigate = useNavigate();
   const handleNavigate = (routeName) => navigate(routeName);
 
-  React.useEffect(() => {
-    api
-    .fetch('/api/trips/company/', {},true)
-    .then(response =>{
-      console.log(response.data)
-        setUser(response.data)            
-    }).catch(err => {console.log(err)}),
-    []
-  })
+  // React.useEffect(() => {
+  //   api
+  //   .fetch('/api/trips/company/', {},true)
+  //   .then(response =>{
+  //     console.log(response.data)
+  //       setUser(response.data)            
+  //   }).catch(err => {console.log(err)}),
+  //   []
+  // })
   return (
     <Navbar expand="lg" className='appbar'>
       <Container>
@@ -72,8 +72,8 @@ function AppNavBar() {
         <Nav onClick={() => handleNavigate('/setting')} className='profile-info'>
           <SearchIcon sx={{ color: '#40798C', fontSize: 25 }} />
           <h3>Profile</h3>
-          <Avatar alt="Remy Sharp" src={user != null ? user.logo: AvatarImg} />
-          {/* <Avatar alt="Remy Sharp" src={AvatarImg} /> */}
+          {/* <Avatar alt="Remy Sharp" src={user != null ? user.logo: AvatarImg} /> */}
+          <Avatar alt="Remy Sharp" src={AvatarImg} />
         </Nav>
       </Container>
     </Navbar>

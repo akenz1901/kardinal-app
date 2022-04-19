@@ -3,6 +3,8 @@ import { Dropdown } from 'react-bootstrap'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './styles.css'
 import { useNavigate } from 'react-router-dom';
+import AppNavBar from '../../../AppNavbar/app_nav'
+import {flightData} from '../index'
 
 let flightDetail = [
   {
@@ -39,11 +41,18 @@ let flightDetail = [
 
 function SearchFlight() {
   const [selected, setSelected] = useState([]);
-  const [flightsData, setFlightData] = useState(null)
+  const [onewayData, setFlightData] = useState({})
 
+  React.useEffect(() => {
+    setFlightData(flightData())
+    console.log(onewayData),
+    []
+  })
 
   let navigate = useNavigate()
   return (
+    <>
+    <AppNavBar />
     <main>
       <section className='search-flight'>
         <div className='search-flight-heading-cont'>
@@ -67,6 +76,7 @@ function SearchFlight() {
         <FLightSelection selected={selected} setSelected={setSelected} />
       </section>
     </main>
+    </>
   )
 }
 

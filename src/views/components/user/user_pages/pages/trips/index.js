@@ -4,7 +4,7 @@ import Tab from 'react-bootstrap/Tab'
 import Form from 'react-bootstrap/Form'
 import './style.css'
 import FlightLoader, { HotelLoader } from './loader'
-import { SearchInternationalFlightsOneway, SearchInternationalFlightsReturn } from './flight_actions'
+import {SearchInternationalFlightsOneway, SearchInternationalFlightsReturn} from './flight_actions'
 
 // Material ui icon imports
 import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
@@ -135,6 +135,11 @@ const FlightTab = ({ setOpenModal}) => {
     )
 }
 
+let data = {}
+
+export const flightData = () =>{
+    return data
+};
 
 const TripsType = ({ tripType }) => {
     const [multiCityList, setMultiCityList] = useState(['one', 'two']);
@@ -145,6 +150,9 @@ const TripsType = ({ tripType }) => {
     const [departureDate1, setDepartureDate1] = useState('')
     const [departureDate2, setDepartureDate2] = useState('')
     const [numberOfAdults, setNumberOfAdult] = useState('')
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
 
     const returnData = {
         flight_type:tripType,
@@ -158,13 +166,18 @@ const TripsType = ({ tripType }) => {
     }
 
     const onewayData = {
-        flight_type:tripType,
-        from1:from,
-        to1:to,
-        departure_date1:departureDate1,
+        flight_type:'oneway',
+        from:from,
+        to:to,
+        departure_date:'2022-09-17',
         adults:2
     }
 
+
+    data =  SearchInternationalFlightsOneway(onewayData)
+
+}
+    console.log(data)
 
     let addTrip = () => {
         let newTrip = ['new', ...multiCityList]
@@ -178,6 +191,7 @@ const TripsType = ({ tripType }) => {
     return (
         <>
             {tripType === 'roundtrip' && <div className='flight-information'>
+            <Form onChange={handleSubmit}>
                 <label>
                     Departure
                     <div className='select-flight-infos'>
@@ -185,7 +199,7 @@ const TripsType = ({ tripType }) => {
                         <Form.Select 
                         aria-label="Default select example" 
                         style={{ width: '150px' }}
-                        onChange={e => setTo(e.target.value)}
+                        onChange={e => setFrom(e.target.value)}
                         value={from}
                         >
                             <option>From</option>
@@ -202,8 +216,8 @@ const TripsType = ({ tripType }) => {
                         <Form.Select 
                         aria-label="Default select example" 
                         style={{ width: '160px' }} 
-                        onChange={e => setFrom(e.target.value)}
-                        value={from}
+                        onChange={e => setTo(e.target.value)}
+                        value={to}
                         >
                             <option>To</option>
                             <option value="1">ABV</option>
@@ -226,6 +240,7 @@ const TripsType = ({ tripType }) => {
                         <input type={'date'} />
                     </div>
                 </label>
+                </Form>
             </div>}
             {tripType === 'oneway' && <div className='flight-information'>
                 <label>
@@ -233,7 +248,7 @@ const TripsType = ({ tripType }) => {
                     <div className='select-flight-infos'>
                         <FlightTakeoffOutlinedIcon sx={{ color: '#40798C', fontSize: 25, marginBottom: 1 }} />
                         <Form.Select aria-label="Default select example" style={{ width: '150px' }} 
-                        onChange={e => setTo(e.target.value)}
+                        onChange={e => setFrom(e.target.value)}
                         value={from}
                         >
                             <option>From</option>
@@ -248,8 +263,8 @@ const TripsType = ({ tripType }) => {
                     <div className='select-flight-infos'>
                         <FlightLandOutlinedIcon sx={{ color: '#40798C', fontSize: 25, marginBottom: 1 }} />
                         <Form.Select aria-label="Default select example" style={{ width: '160px' }}
-                        onChange={e => setFrom(e.target.value)}
-                        value={from}
+                        onChange={e => setTo(e.target.value)}
+                        value={to}
                         >
                             <option>To</option>
                             <option value="ABV">ABV</option>

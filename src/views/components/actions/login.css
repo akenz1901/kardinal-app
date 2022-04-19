@@ -2,11 +2,11 @@
     background-color: #243256;
     border-radius: 6.71812px;
     font-size: 17.2949px;
-    /* line-height: 22px; */
+    line-height:0.8cm !important;
     color: #fff;
     border: 0 !important;
     min-width: 115.56px !important;
-    text-align: center;
+    /* text-align: center !important; */
 }
 .row>* {
     flex-shrink: 0 !important;

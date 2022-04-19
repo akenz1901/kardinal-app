@@ -118,6 +118,7 @@ function Login() {
                                 type="submit"
                                 disabled={!validateForm()}
                                 onClick={() => setIsLogin(true)}
+                                style={{ textAlign: 'center'}}
                             >
                             {/* spinner-border */}
                                 {isLogin ? 
