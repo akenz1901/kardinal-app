@@ -4,7 +4,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './styles.css'
 import { useNavigate } from 'react-router-dom';
 import AppNavBar from '../../../AppNavbar/app_nav'
-import {flightData} from '../index'
 
 let flightDetail = [
   {
@@ -43,11 +42,11 @@ function SearchFlight() {
   const [selected, setSelected] = useState([]);
   const [onewayData, setFlightData] = useState({})
 
-  React.useEffect(() => {
-    setFlightData(flightData())
-    console.log(onewayData),
-    []
-  })
+  // React.useEffect(() => {
+  //   setFlightData(flightData())
+  //   console.log(onewayData),
+  //   []
+  // })
 
   let navigate = useNavigate()
   return (

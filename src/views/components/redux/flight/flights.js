@@ -12,7 +12,8 @@ export function addSearchedFlights(flightData){
 }
 
 const defaultState = {
-    data:'Nothing'
+    message:'failed',
+    data:[]
 }
 
 function flightSearches(state=defaultState, action){
@@ -21,7 +22,7 @@ function flightSearches(state=defaultState, action){
             return state
 
         default:
-            return state.data
+            return state.message
     }
 };
 

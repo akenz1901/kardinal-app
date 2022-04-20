@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form'
 import './style.css'
 import FlightLoader, { HotelLoader } from './loader'
 import {SearchInternationalFlightsOneway, SearchInternationalFlightsReturn} from './flight_actions'
+import { addSearchedFlights } from '../../../../redux/flight/flights'
+import { useDispatch } from 'react-redux'
 
 // Material ui icon imports
 import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
@@ -13,6 +15,8 @@ import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
 import HouseboatOutlinedIcon from '@mui/icons-material/HouseboatOutlined';
 import DatePicker from "react-multi-date-picker"
 import PassangerDetails from './PassangerDetail'
+
+let data = {}
 
 const Trips = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -49,8 +53,22 @@ const FlightTab = ({ setOpenModal}) => {
         setTripType(event.target.value);
     }
 
+    // const dispatch = useDispatch();
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+
+    
+    SearchInternationalFlightsOneway(data)
+    .then((res) =>{
+        console.log(res)
+        console.log(res.message)
+        // dispatch(addSearchedFlights(res.data))
+    }).catch((error) =>{console.log(error)})
+};
+
     return (
         <div>
+        <Form onSubmit={handleSubmit}>
             <section className='f-sec1'>
                 <label>
                     Select up to 5 travelers
@@ -131,15 +149,10 @@ const FlightTab = ({ setOpenModal}) => {
                 <button onClick={() => setEnableModal(true)}>Find Flight</button>
             </section>
             {enableModal && <FlightLoader enableModal={enableModal} setEnableModal={setEnableModal} />}
+            </Form>
         </div>
     )
 }
-
-let data = {}
-
-export const flightData = () =>{
-    return data
-};
 
 const TripsType = ({ tripType }) => {
     const [multiCityList, setMultiCityList] = useState(['one', 'two']);
@@ -150,9 +163,6 @@ const TripsType = ({ tripType }) => {
     const [departureDate1, setDepartureDate1] = useState('')
     const [departureDate2, setDepartureDate2] = useState('')
     const [numberOfAdults, setNumberOfAdult] = useState('')
-
-    const handleSubmit = (e) =>{
-        e.preventDefault();
 
     const returnData = {
         flight_type:tripType,
@@ -169,15 +179,11 @@ const TripsType = ({ tripType }) => {
         flight_type:'oneway',
         from:from,
         to:to,
-        departure_date:'2022-09-17',
-        adults:2
+        departure_date:'2022-06-17',
+        adults:1
     }
 
-
-    data =  SearchInternationalFlightsOneway(onewayData)
-
-}
-    console.log(data)
+    data = onewayData
 
     let addTrip = () => {
         let newTrip = ['new', ...multiCityList]
@@ -191,7 +197,6 @@ const TripsType = ({ tripType }) => {
     return (
         <>
             {tripType === 'roundtrip' && <div className='flight-information'>
-            <Form onChange={handleSubmit}>
                 <label>
                     Departure
                     <div className='select-flight-infos'>
@@ -240,7 +245,6 @@ const TripsType = ({ tripType }) => {
                         <input type={'date'} />
                     </div>
                 </label>
-                </Form>
             </div>}
             {tripType === 'oneway' && <div className='flight-information'>
                 <label>

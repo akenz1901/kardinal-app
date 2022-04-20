@@ -10,10 +10,9 @@ import api from '../../../../actions/apiServices'
     }
 
 
-    export const SearchInternationalFlightsOneway = async (data = {}) => {
+    export const SearchInternationalFlightsOneway = async (data) => {
         return await api.fetch('/api/trips/international_flights', data, true)
         .then((res) => {
-            console.log(res)
             console.log(res.data)
             console.log(res.message)
             if(res.message === 'success'){
