@@ -5,6 +5,8 @@ import { BookingOnHold, SearchHistory } from '../../tabletemplate'
 import BasicModal from '../utils/Modal'
 import PaymentModal from '../utils/modal/PaymentModal'
 import api from '../../../../actions/apiServices'
+import PaystackPayment from '../payment/Paystack'
+import User from '../../../../actions/UserInfo'
 
 import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
 import AirplaneTicketOutlinedIcon from '@mui/icons-material/AirplaneTicketOutlined';
@@ -43,7 +45,13 @@ function Dashboard() {
       .then(response =>{
           setSummary(response.data[0])
       }).catch(err => {console.log(err)})
-      ,  
+      ,
+      User().then(
+        (res) => {
+          localStorage.setItem('emaili', res.email)
+          console.log(res)
+        }
+      ).catch((err) =>{console.log(err)}),
       []
   })
   return (
@@ -129,7 +137,8 @@ function Dashboard() {
         <SearchHistory />
       </section>
       {enableModal === true && <BasicModal setEnableModal={setEnableModal} enableModal={enableModal} />}
-      {enablePaymentModal === true && <PaymentModal setPaymentModal={setEnablePaymentModal} paymentModal={enablePaymentModal} />}
+      {/* {enablePaymentModal === true && <PaymentModal setPaymentModal={setEnablePaymentModal} paymentModal={enablePaymentModal} />} */}
+      {enablePaymentModal === true && <PaystackPayment setPaymentModal={setEnablePaymentModal} paymentModal={enablePaymentModal} />}
     </main>
   )
 }

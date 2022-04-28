@@ -1,4 +1,4 @@
-.payment_modal_cont {
+/* .payment_modal_cont {
   width: 493px;
   height: 579px;
   background: #ffffff;
@@ -10,8 +10,21 @@
   transform: translate(-50%, -50%);
   outline: none;
   padding: 50px 40px;
-}
+} */
 
+.payment_modal_cont {
+  width: 400px;
+  /* height: 579px; */
+  background: #ffffff;
+  mix-blend-mode: normal;
+  border-radius: 3.56px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  outline: none;
+  padding: 50px 40px;
+}
 .modal_heading_top {
   font-size: 19.2613px;
   line-height: 24px;
@@ -220,4 +233,13 @@ form {
   margin: 10px 0;
   margin-right: 30px;
   border: 0.428028px solid #e5e5e5;
+}
+
+button{
+  padding: 7px 18px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: #243256;
+  color: white;
+  text-decoration: none;
 }
